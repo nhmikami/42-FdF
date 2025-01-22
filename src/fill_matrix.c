@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fill_matrix.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/22 17:10:44 by naharumi          #+#    #+#             */
+/*   Updated: 2025/01/22 17:59:55 by naharumi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
-// fill_matrix
 static int	is_valid_int(char *str)
 {
 	long	value;
@@ -86,7 +97,7 @@ static int	get_color(char *str)
 static int	fill_point(t_map *map, int x, int y, char *str)
 {
 	if (!is_valid_int(str) || !is_valid_color(str))
-		return (0); // erro - mapa inconsistente
+		return (0);
 	map->matrix[y][x].x = x;
 	map->matrix[y][x].y = y;
 	map->matrix[y][x].z = ft_atoi(str);
@@ -106,15 +117,13 @@ int	fill_matrix(t_map *map, int fd)
 	{
 		line = get_next_line(fd);
 		aux = ft_split(line, ' ');
+		if (!line || !aux)
+			return (free_and_return(aux, line));
 		x = 0;
 		while (x < map->width)
 		{
 			if (!fill_point(map, x, y, aux[x]))
-			{
-				ft_free_arr(aux);
-				free(line);
-				return (0); // erro - mapa inconsistente 
-			}
+				return (free_and_return(aux, line));
 			x++;
 		}
 		ft_free_arr(aux);

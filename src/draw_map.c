@@ -1,23 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   draw_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/22 17:10:21 by naharumi          #+#    #+#             */
+/*   Updated: 2025/01/22 19:41:42 by naharumi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
-t_point project_point(t_point p, t_data *data)
+t_point	project_point(t_point p, t_data *data)
 {
-	t_point proj;
+	t_point	proj;
 
-	p = rotate_x(p, data->angle_x);
-	p = rotate_y(p, data->angle_y);
-	p = rotate_z(p, data->angle_z);
+	p = rotate(p, data);
 	proj.color = p.color;
 	if (data->projection == 0)
-	{
-		proj.x = (p.x - p.y) * cos(M_PI / 6);
-		proj.y = (p.x + p.y) * sin(M_PI / 6) - p.z;
-	}
+		proj = project_isometric(p, data);
 	else if (data->projection == 1)
-	{
-		proj.x = p.x;
-		proj.y = p.y - p.z;
-	}
+		proj = project_parallel(p, data);
+	else if (data->projection == 2)
+		proj = project_top(p, data);
+	else if (data->projection == 3)
+		proj = project_front(p, data);
+	else if (data->projection == 4)
+		proj = project_right(p, data);
 	proj.x = proj.x * data->zoom + data->offset_x;
 	proj.y = proj.y * data->zoom + data->offset_y;
 	return (proj);
@@ -28,7 +38,7 @@ static void	draw_pixel(t_point p, t_data *data)
 	char	*pixel;
 
 	if (p.x >= 0 && p.x < (WINDOW_WIDTH - MENU_WIDTH)
-			&& p.y >= 0 && p.y < WINDOW_HEIGHT)
+		&& p.y >= 0 && p.y < WINDOW_HEIGHT)
 	{
 		pixel = data->adr + ((int)p.y * data->size_line
 				+ (int)p.x * (data->bpp / 8));
@@ -37,7 +47,7 @@ static void	draw_pixel(t_point p, t_data *data)
 	return ;
 }
 
-static void draw_line(t_point p1, t_point p2, t_data *data)
+static void	draw_line(t_point p1, t_point p2, t_data *data)
 {
 	t_params	dda;
 	int			i;
@@ -48,8 +58,8 @@ static void draw_line(t_point p1, t_point p2, t_data *data)
 		dda.steps = fabs(dda.dx);
 	else
 		dda.steps = fabs(dda.dy);
-	if(dda.steps == 0)
-		return;
+	if (dda.steps == 0)
+		return ;
 	dda.x_increment = dda.dx / dda.steps;
 	dda.y_increment = dda.dy / dda.steps;
 	dda.x = p1.x;
@@ -137,8 +147,6 @@ static void	draw_line(t_point p1, t_point p2, t_data *data)
 	return ;
 }*/
 
-
-
 /*static int interpolate_color(int color1, int color2, double t)
 {
 	int r1 = (color1 >> 16) & 0xFF;
@@ -185,10 +193,8 @@ static void	draw_line(t_point p1, t_point p2, t_data *data)
 		bresenham(&params);
 		step++;
 	}
-}*/
-
-
-/*t_point project_point(t_point point, t_data *data)
+}
+t_point project_point(t_point point, t_data *data)
 {
 	t_point projected;
 	float x, y, z;

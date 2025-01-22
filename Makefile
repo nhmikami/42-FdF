@@ -1,20 +1,14 @@
 NAME			=	fdf
-BONUS_NAME		=	fdf
 RM				=	rm -f
 CC				=	gcc
 CFLAGS			=	-Wall -Wextra -Werror
 
 SRC_PATH		=	./src
-BONUS_PATH		=	./src_bonus
 INC_PATH		=	./inc
 LIB_PATH		=	./lib
 
 SRC				=	fdf.c
-
-BONUS_SRC		=	fdf.c
-
 OBJ				=	$(addprefix $(SRC_PATH)/, $(SRC:.c=.o))
-BONUS_OBJ		=	$(addprefix $(BONUS_PATH)/, $(BONUS_SRC:.c=.o))
 
 INC				=	-I$(INC_PATH)
 
@@ -31,24 +25,14 @@ $(NAME):			$(LIBFT) $(OBJ)
 $(SRC_PATH)%.o: $(SRC_PATH)%.c $(INC_PATH)/pipex.h
 	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
-bonus:				$(BONUS_NAME)
-
-$(BONUS_NAME):		$(LIBFT) $(BONUS_OBJ)
-						$(CC) $(CFLAGS) $(BONUS_OBJ) -L$(LIB_PATH) -lft -o $(BONUS_NAME)
-
-$(BONUS_PATH)%.o: $(BONUS_PATH)%.c $(INC_PATH)/pipex_bonus.h
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
-
 clean:
-					$(RM) $(OBJ) $(BONUS_OBJ)
+					$(RM) $(OBJ)
 					make clean -C $(LIB_PATH) -s
 
 fclean:				clean
-					$(RM) $(NAME) $(BONUS_NAME)
+					$(RM) $(NAME)
 					make fclean -C $(LIB_PATH) -s
 
 re:					fclean all
 
-rebonus:			fclean bonus
-
-.PHONY:		all bonus clean fclean re rebonus
+.PHONY:		all clean fclean re

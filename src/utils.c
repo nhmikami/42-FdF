@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/22 17:10:30 by naharumi          #+#    #+#             */
+/*   Updated: 2025/01/22 17:57:41 by naharumi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
 void	exit_error(char *msg, t_map *map)
@@ -33,6 +45,15 @@ void	free_map(t_map *map)
 	return ;
 }
 
+int	free_and_return(char **arr, char *str)
+{
+	if (arr)
+		ft_free_arr(arr);
+	if (str)
+		free(str);
+	return (0);
+}
+
 int	check_extension(char *file)
 {
 	int	len;
@@ -41,18 +62,4 @@ int	check_extension(char *file)
 	if (ft_strncmp(&file[len - 4], ".fdf", 4) == 0)
 		return (1);
 	return (0);
-}
-
-void	ft_bzero(void *s, size_t n)
-{
-	unsigned char	*ptr;
-	size_t			i;
-
-	ptr = (unsigned char *)s;
-	i = 0;
-	while (i < n)
-	{
-		ptr[i] = 0;
-		i++;
-	}
 }

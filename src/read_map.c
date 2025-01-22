@@ -1,6 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   read_map.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/22 17:10:08 by naharumi          #+#    #+#             */
+/*   Updated: 2025/01/22 17:23:15 by naharumi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
-// read_map
 static int	map_width(char *str)
 {
 	int	count;
@@ -76,7 +87,7 @@ t_map	*read_map(char *file)
 	int		fd;
 	t_map	*map;
 
-	map = malloc(sizeof(t_map)); // malloc
+	map = malloc(sizeof(t_map));
 	if (!map)
 		exit_error("Error: Failed to allocate memory", NULL);
 	if (!init_map(map, file))

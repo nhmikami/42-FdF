@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rotate.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/22 17:10:36 by naharumi          #+#    #+#             */
+/*   Updated: 2025/01/22 18:59:28 by naharumi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
-// rotate
-t_point	rotate_x(t_point p, float angle_x)
+static t_point	rotate_x(t_point p, float angle_x)
 {
 	t_point	rotated;
 
@@ -12,7 +23,7 @@ t_point	rotate_x(t_point p, float angle_x)
 	return (rotated);
 }
 
-t_point	rotate_y(t_point p, float angle_y)
+static t_point	rotate_y(t_point p, float angle_y)
 {
 	t_point	rotated;
 
@@ -23,7 +34,7 @@ t_point	rotate_y(t_point p, float angle_y)
 	return (rotated);
 }
 
-t_point	rotate_z(t_point p, float angle_z)
+static t_point	rotate_z(t_point p, float angle_z)
 {
 	t_point	rotated;
 
@@ -32,4 +43,12 @@ t_point	rotate_z(t_point p, float angle_z)
 	rotated.z = p.z;
 	rotated.color = p.color;
 	return (rotated);
+}
+
+t_point	rotate(t_point p, t_data *data)
+{
+	p = rotate_x(p, data->angle_x);
+	p = rotate_y(p, data->angle_y);
+	p = rotate_z(p, data->angle_z);
+	return (p);
 }
