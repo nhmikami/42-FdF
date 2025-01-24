@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   fdf.h                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 10:51:02 by naharumi          #+#    #+#             */
+/*   Updated: 2025/01/24 10:55:35 by naharumi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef FDF_H
 # define FDF_H
 
@@ -103,6 +115,7 @@ void	init_data(t_data *data);
 // draw map
 void	draw_map(t_data *data);
 t_point	rotate(t_point p, t_data *data);
+t_point	project_point(t_point p, t_data *data);
 t_point	project_isometric(t_point p);
 t_point	project_parallel(t_point p);
 t_point	project_top(t_point p);

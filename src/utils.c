@@ -6,7 +6,7 @@
 /*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 17:10:30 by naharumi          #+#    #+#             */
-/*   Updated: 2025/01/22 17:57:41 by naharumi         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:09:13 by naharumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ void	exit_error(char *msg, t_map *map)
 	if (map)
 		free_map(map);
 	exit(EXIT_FAILURE);
+	return ;
 }
 
 void	free_map(t_map *map)
@@ -49,8 +50,8 @@ int	free_and_return(char **arr, char *str)
 {
 	if (arr)
 		ft_free_arr(arr);
-	//if (str)
-	free(str);
+	if (str)
+		free(str);
 	return (0);
 }
 
@@ -65,6 +66,7 @@ void	clear_gnl(int fd)
 		line = get_next_line(fd);
 	}
 	close(fd);
+	return ;
 }
 
 int	check_extension(char *file)

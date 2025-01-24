@@ -6,7 +6,7 @@
 /*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 17:10:08 by naharumi          #+#    #+#             */
-/*   Updated: 2025/01/22 17:23:15 by naharumi         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:54:18 by naharumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ t_map	*read_map(char *file)
 	if (!fill_matrix(map, fd))
 	{
 		clear_gnl(fd);
-		exit_error("Error: Invalid map - point", map);
+		exit_error("Error: Invalid map", map);
 	}
 	close(fd);
 	return (map);

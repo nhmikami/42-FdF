@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   handle_key.c                                       :+:      :+:    :+:   */
+/*   handle_keys.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 17:11:02 by naharumi          #+#    #+#             */
-/*   Updated: 2025/01/22 19:15:58 by naharumi         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:05:49 by naharumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ static void	handle_projection(int key, t_data *data)
 		data->projection = 3;
 	else if (key == R_KEY)
 		data->projection = 4;
+	return ;
 }
 
 static void	handle_zoom(int key, t_data *data)
@@ -39,6 +40,7 @@ static void	handle_zoom(int key, t_data *data)
 		data->zoom += 1;
 	else if (key == MINUS_KEY && data->zoom > 1)
 		data->zoom -= 1;
+	return ;
 }
 
 static void	handle_move(int key, t_data *data)
@@ -51,6 +53,7 @@ static void	handle_move(int key, t_data *data)
 		data->offset_x += 10;
 	else if (key == DOWN_KEY)
 		data->offset_y += 10;
+	return ;
 }
 
 static void	handle_rotation(int key, t_data *data)
@@ -67,6 +70,7 @@ static void	handle_rotation(int key, t_data *data)
 		data->angle_z -= 0.1;
 	else if (key == Q_KEY)
 		data->angle_z += 0.1;
+	return ;
 }
 
 int	handle_key(int key, t_data *data)

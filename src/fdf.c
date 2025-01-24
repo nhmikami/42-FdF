@@ -6,7 +6,7 @@
 /*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 17:09:58 by naharumi          #+#    #+#             */
-/*   Updated: 2025/01/22 19:32:11 by naharumi         ###   ########.fr       */
+/*   Updated: 2025/01/24 11:53:10 by naharumi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,8 @@ static void	draw_menu(t_data *data)
 	w = 0xFFFFFF;
 	pos = WINDOW_WIDTH - MENU_WIDTH + 10;
 	line = WINDOW_HEIGHT;
-	while (line)
-	{
+	while (line--)
 		mlx_pixel_put(data->mlx, data->win, pos - 10, line, w);
-		line--;
-	}
 	mlx_string_put(data->mlx, data->win, pos, 25, w, "Close              ESC");
 	mlx_string_put(data->mlx, data->win, pos, 50, w, "Zoom     +/- or scroll");
 	mlx_string_put(data->mlx, data->win, pos, 75, w, "Move            arrows");
@@ -39,14 +36,14 @@ static void	draw_menu(t_data *data)
 	mlx_string_put(data->mlx, data->win, pos, 275, w, "Top                  T");
 	mlx_string_put(data->mlx, data->win, pos, 300, w, "Front                F");
 	mlx_string_put(data->mlx, data->win, pos, 325, w, "Right                R");
+	return ;
 }
 
 static void	draw_interface(t_data *data)
 {
 	draw_menu(data);
 	render_img(data);
-	//draw_map(data);
-	//mlx_put_image_to_window(data->mlx, data->win, data->img, 0, 0);
+	return ;
 }
 
 int	main(int ac, char **av)
@@ -67,6 +64,3 @@ int	main(int ac, char **av)
 	free_map(data.map);
 	return (0);
 }
-
-// gcc -Wall -Werror -Wextra src/*.c lib/*.c -Iincludes -Iminilibx-linux -Lminilibx-linux -lmlx -lm -lXext -lX11 -o test
-// valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./fdf maps/t2.fdf

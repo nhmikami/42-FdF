@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_mlx.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: naharumi <naharumi@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2025/01/24 10:51:22 by naharumi          #+#    #+#             */
+/*   Updated: 2025/01/24 11:01:57 by naharumi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../inc/fdf.h"
 
 static void	get_bounds(t_data *data, t_bounds *bounds)
@@ -6,10 +18,10 @@ static void	get_bounds(t_data *data, t_bounds *bounds)
 	int		y;
 	t_point	proj;
 
-	bounds->min_x = INT_MAX;
-	bounds->max_x = -INT_MAX;
-	bounds->min_y = INT_MAX;
-	bounds->max_y = -INT_MAX;
+	bounds->min_x = (float)INT_MAX;
+	bounds->max_x = (float)INT_MIN;
+	bounds->min_y = (float)INT_MAX;
+	bounds->max_y = (float)INT_MIN;
 	y = -1;
 	while (++y < data->map->height)
 	{
@@ -47,6 +59,7 @@ static void	initial_zoom(t_data *data)
 		data->zoom = 1;
 	if (data->zoom > 15)
 		data->zoom = 15;
+	return ;
 }
 
 static void	center_map(t_data *data)
@@ -71,6 +84,7 @@ static void	center_map(t_data *data)
 		data->offset_x = 0;
 	if (data->offset_y < 0)
 		data->offset_y = 0;
+	return ;
 }
 
 void	init_data(t_data *data)
@@ -99,4 +113,5 @@ void	init_data(t_data *data)
 	data->mouse.is_pressed = 0;
 	initial_zoom(data);
 	center_map(data);
+	return ;
 }
