@@ -6,28 +6,45 @@ CFLAGS			=	-Wall -Wextra -Werror
 SRC_PATH		=	./src
 INC_PATH		=	./inc
 LIB_PATH		=	./lib
+MLX_PATH		=	./minilibx-linux
 
-SRC				=	fdf.c
+SRC				=	fdf.c \
+					draw_map.c \
+					fill_matrix.c \
+					handle_events.c \
+					handle_keys.c \
+					handle_mouse.c \
+					init_mlx.c \
+					projections.c \
+					read_map.c \
+					rotate.c \
+					utils.c
+					
 OBJ				=	$(addprefix $(SRC_PATH)/, $(SRC:.c=.o))
 
 INC				=	-I$(INC_PATH)
-
 LIBFT			=	$(LIB_PATH)/libft.a
+LIBMLX			=	$(MLX_PATH)/libmlx.a -lXext -lX11 -lm -lz
 
 all:				$(NAME)
+
+$(NAME):			$(OBJ) $(LIBFT) $(LIBMLX)
+						$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBMLX) -o $(NAME)
+
+
+$(SRC_PATH)%.o: $(SRC_PATH)%.c $(INC_PATH)/fdf.h
+	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 $(LIBFT):
 					make -C $(LIB_PATH) -s
 
-$(NAME):			$(LIBFT) $(OBJ)
-						$(CC) $(CFLAGS) $(OBJ) -L$(LIB_PATH) -lft -o $(NAME)
-
-$(SRC_PATH)%.o: $(SRC_PATH)%.c $(INC_PATH)/pipex.h
-	$(CC) $(CFLAGS) -c $< -o $@ $(INC)
+$(LIBMLX):
+					make -C $(MLX_PATH) -s
 
 clean:
 					$(RM) $(OBJ)
 					make clean -C $(LIB_PATH) -s
+					make clean -C $(MLX_PATH) -s
 
 fclean:				clean
 					$(RM) $(NAME)
@@ -35,4 +52,6 @@ fclean:				clean
 
 re:					fclean all
 
-.PHONY:		all clean fclean re
+bonus:				all
+
+.PHONY:		all bonus clean fclean re

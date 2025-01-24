@@ -29,14 +29,10 @@ static int	map_width(char *str)
 	return (count);
 }
 
-static int	validate_map(t_map *map, char *file)
+static int	validate_map(t_map *map, int fd)
 {
-	int		fd;
 	char	*line;
 
-	fd = open(file, O_RDONLY);
-	if (fd == -1)
-		exit_error("Error: Failed to open file", NULL);
 	line = get_next_line(fd);
 	while (line)
 	{
@@ -44,7 +40,7 @@ static int	validate_map(t_map *map, char *file)
 			map->width = map_width(line);
 		else if (map->width != map_width(line))
 		{
-			close(fd);
+			clear_gnl(fd);
 			free(line);
 			return (0);
 		}
@@ -58,25 +54,25 @@ static int	validate_map(t_map *map, char *file)
 	return (1);
 }
 
-static int	init_map(t_map *map, char *file)
+static int	init_map(t_map *map, int fd)
 {
 	int		i;
 
 	map->width = 0;
 	map->height = 0;
-	if (!validate_map(map, file))
+	if (!validate_map(map, fd))
+		return (0);
+	if (map->width == 0 || map->height == 0)
 		return (0);
 	map->matrix = (t_point **)malloc(sizeof(t_point *) * (map->height));
 	if (!map->matrix)
-		exit_error("Error: Failed to allocate memory", NULL);
+		exit_error("Error: Failed to allocate memory for map matrix", NULL);
 	i = 0;
 	while (i < map->height)
 	{
 		map->matrix[i] = (t_point *)malloc(sizeof(t_point) * (map->width));
 		if (!map->matrix[i])
-		{
-			exit_error("Error: Failed to allocate memory", map);
-		}
+			exit_error("Error: Failed to allocate memory for map row", map);
 		i++;
 	}
 	return (1);
@@ -87,22 +83,24 @@ t_map	*read_map(char *file)
 	int		fd;
 	t_map	*map;
 
+	fd = open(file, O_RDONLY);
+	if (fd == -1)
+		exit_error("Error: Failed to open file", NULL);
 	map = malloc(sizeof(t_map));
 	if (!map)
-		exit_error("Error: Failed to allocate memory", NULL);
-	if (!init_map(map, file))
+		exit_error("Error: Failed to allocate memory for map structure", NULL);
+	if (!init_map(map, fd))
 	{
 		free(map);
-		exit_error("Error: Inconsistent map - collums", NULL);
+		exit_error("Error: Invalid map", NULL);
 	}
 	fd = open(file, O_RDONLY);
 	if (fd == -1)
-	{
 		exit_error("Error: Failed to open file", map);
-	}
 	if (!fill_matrix(map, fd))
 	{
-		exit_error("Error: Inconsistent map - point", map);
+		clear_gnl(fd);
+		exit_error("Error: Invalid map - point", map);
 	}
 	close(fd);
 	return (map);

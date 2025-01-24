@@ -12,7 +12,7 @@
 
 #include "../inc/fdf.h"
 
-t_point	project_isometric(t_point p, t_data *data)
+t_point	project_isometric(t_point p)
 {
 	t_point	proj;
 
@@ -21,7 +21,7 @@ t_point	project_isometric(t_point p, t_data *data)
 	return (proj);
 }
 
-t_point	project_parallel(t_point p, t_data *data)
+t_point	project_parallel(t_point p)
 {
 	t_point	proj;
 
@@ -30,7 +30,7 @@ t_point	project_parallel(t_point p, t_data *data)
 	return (proj);
 }
 
-t_point	project_top(t_point p, t_data *data)
+t_point	project_top(t_point p)
 {
 	t_point	proj;
 
@@ -39,7 +39,7 @@ t_point	project_top(t_point p, t_data *data)
 	return (proj);
 }
 
-t_point	project_front(t_point p, t_data *data)
+t_point	project_front(t_point p)
 {
 	t_point	proj;
 
@@ -48,7 +48,7 @@ t_point	project_front(t_point p, t_data *data)
 	return (proj);
 }
 
-t_point	project_right(t_point p, t_data *data)
+t_point	project_right(t_point p)
 {
 	t_point	proj;
 

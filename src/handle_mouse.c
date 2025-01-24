@@ -49,13 +49,14 @@ int	handle_mouse_move(int x, int y, t_data *data)
 		dy = y - data->mouse.prev_y;
 		if (data->mouse.button == 1)
 		{
-			data->angle_x -= dy * 0.005;
-			data->angle_y += dx * 0.005;
+			data->offset_x += dx;
+			data->offset_y += dy;
 		}
 		else if (data->mouse.button == 3)
 		{
-			data->offset_x += dx;
-			data->offset_y += dy;
+			data->angle_x -= dy * 0.005;
+			data->angle_y += dx * 0.005;
+			data->angle_z -= dx * 0.005;
 		}
 		data->mouse.prev_x = x;
 		data->mouse.prev_y = y;

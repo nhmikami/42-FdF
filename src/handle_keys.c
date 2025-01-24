@@ -71,7 +71,6 @@ static void	handle_rotation(int key, t_data *data)
 
 int	handle_key(int key, t_data *data)
 {
-	// printf("Key code: %d\n", key);
 	if (key == ESC_KEY)
 		close_window(data);
 	handle_projection(key, data);
