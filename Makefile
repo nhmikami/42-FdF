@@ -28,7 +28,7 @@ LIBMLX			=	$(MLX_PATH)/libmlx.a -lXext -lX11 -lm -lz
 
 all:				$(NAME)
 
-$(NAME):			$(OBJ) $(LIBFT) $(LIBMLX)
+$(NAME):			$(OBJ) $(LIBFT)
 						$(CC) $(CFLAGS) $(OBJ) $(LIBFT) $(LIBMLX) -o $(NAME)
 
 
@@ -38,13 +38,9 @@ $(SRC_PATH)%.o: $(SRC_PATH)%.c $(INC_PATH)/fdf.h
 $(LIBFT):
 					make -C $(LIB_PATH) -s
 
-$(LIBMLX):
-					make -C $(MLX_PATH) -s
-
 clean:
 					$(RM) $(OBJ)
 					make clean -C $(LIB_PATH) -s
-					make clean -C $(MLX_PATH) -s
 
 fclean:				clean
 					$(RM) $(NAME)
