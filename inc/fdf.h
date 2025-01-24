@@ -95,25 +95,21 @@ typedef struct s_bounds
 	float	max_y;
 }	t_bounds;
 
-// read_map
+// initializing
 t_map	*read_map(char *file);
 int		fill_matrix(t_map *map, int fd);
 void	init_data(t_data *data);
 
-//draw
+// draw map
 void	draw_map(t_data *data);
-t_point	project_point(t_point p, t_data *data);
-
-// projection
 t_point	rotate(t_point p, t_data *data);
-t_point	project_point(t_point p, t_data *data);
 t_point	project_isometric(t_point p);
 t_point	project_parallel(t_point p);
 t_point	project_top(t_point p);
 t_point	project_front(t_point p);
 t_point	project_right(t_point p);
 
-// events
+// handle events
 void	set_hooks(t_data *data);
 void	render_img(t_data *data);
 int		handle_key(int key, t_data *data);
