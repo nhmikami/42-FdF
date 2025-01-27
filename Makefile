@@ -24,7 +24,7 @@ OBJ				=	$(addprefix $(SRC_PATH)/, $(SRC:.c=.o))
 
 INC				=	-I$(INC_PATH)
 LIBFT			=	$(LIB_PATH)/libft.a
-LIBMLX			=	$(MLX_PATH)/libmlx.a -lXext -lX11 -lm -lz
+LIBMLX			=	-L$(MLX_PATH) -lmlx -lXext -lX11 -lm -lz
 
 all:				$(NAME)
 
