@@ -2,6 +2,10 @@
 
 The FdF (Fil de Fer) project aims to project a 3D map into a 2D screen using the MiniLibX library.
 
+<p align="center">
+  <img src="gif/fdf.gif"><br />
+</p>
+
 ## Description
 
 The program takes a file containing a grid of heights and translates it into a visual representation, allowing the user to interact with the map through keyboard and mouse controls.
@@ -21,6 +25,38 @@ The program takes a file containing a grid of heights and translates it into a v
     *   **Projection switching:** switch between different projections using `I` (isometric), `P` (´parallel), `T` (top), `F` (front) and `R` (right) keys
 *   **Color Interpolation:** implements color interpolation when drawing lines between points
 *   **Menu:** displays an on-screen menu with keyboard and mouse controls
+
+## Drawing a line
+
+The core challenge of this project involves rendering lines to connect the points of the 3D map. Initially, I explored the Bresenham algorithm, which uses integer arithmetic and a decision variable for efficient line drawing. However, after encountering issues (particularly an infinite loop), I shifted to the DDA algorithm, known for its straightforward approach and ease of implementation.
+
+The **DDA (Digital Differential Analyzer) algorithm** is a line-drawing algorithm that calculates and interpolates intermediate points between two given coordinates (x1, y1) and (x2, y2). It works by incrementally stepping along the line, determining the closest pixel to the ideal line at each step. Here's a breakdown of the process:
+
+1. Calculate the differences in the x and y coordinates:
+```c
+dx = x2 - x1;
+dy = y2 - y1;
+```
+2. Determine the number of steps required based on the greater difference:
+```c
+if (abs(dx) > abs(dy)) 
+   steps = abs(dx)
+else
+   steps = abs(dy);
+```
+3. Calculate the increments for each step:
+```c
+x_inc = dx / steps;
+y_inc = dy / steps;
+```
+4. Start at the initial point and incrementally plot each pixel:
+```c
+for (i = 0; i <= steps; i++) {
+    draw_pixel(x, y);
+    x += x_inc;
+    y += y_inc;
+}
+```
 
 ## MiniLibX
 
