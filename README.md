@@ -22,7 +22,8 @@ The program takes a file containing a grid of heights and translates it into a v
     *   **Zoom:** zoom in and out using the `+` and `-` keys or the mouse scroll wheel
     *   **Translation:** move the map using the arrow keys or dragging with the right mouse button
     *   **Rotation:** rotate the map around the X, Y, and Z axes using the `W`, `S`, `A`, `D`, `Q`, and `E` keys or dragging with the left mouse button
-    *   **Projection switching:** switch between different projections using `I` (isometric), `P` (´parallel), `T` (top), `F` (front) and `R` (right) keys
+    *   **Altitude:** change the altitude of the map using the `X` and `Z` keys
+    *   **Projection:** switch between different projections using the `I` (isometric), `P` (´parallel), `T` (top), `F` (front) and `R` (right) keys
 *   **Color Interpolation:** implements color interpolation when drawing lines between points
 *   **Menu:** displays an on-screen menu with keyboard and mouse controls
 
