@@ -43,6 +43,8 @@
 # define S_KEY 115
 # define E_KEY 101
 # define Q_KEY 113
+# define X_KEY 120
+# define Z_KEY 122
 
 typedef struct s_point
 {
@@ -84,6 +86,7 @@ typedef struct s_data
 	float	angle_x;
 	float	angle_y;
 	float	angle_z;
+	float	altitude;
 	t_mouse	mouse;
 }	t_data;
 

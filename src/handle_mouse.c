@@ -18,7 +18,7 @@ int	handle_mouse_press(int button, int x, int y, t_data *data)
 		data->zoom += 1;
 	else if (button == 5 && data->zoom > 1)
 		data->zoom -= 1;
-	else
+	else if (button == 1 || button == 3)
 	{
 		data->mouse.is_pressed = 1;
 		data->mouse.button = button;

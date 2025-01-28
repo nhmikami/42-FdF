@@ -40,6 +40,10 @@ static void	handle_zoom(int key, t_data *data)
 		data->zoom += 1;
 	else if (key == MINUS_KEY && data->zoom > 1)
 		data->zoom -= 1;
+	else if (key == X_KEY)
+		data->altitude += 0.1;
+	else if (key == Z_KEY)
+		data->altitude -= 0.1;
 	return ;
 }
 

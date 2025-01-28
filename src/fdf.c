@@ -31,11 +31,12 @@ static void	draw_menu(t_data *data)
 	mlx_string_put(data->mlx, data->win, pos, 150, w, "Rotate X           W/S");
 	mlx_string_put(data->mlx, data->win, pos, 175, w, "Rotate Y           A/D");
 	mlx_string_put(data->mlx, data->win, pos, 200, w, "Rotate Z           Q/E");
-	mlx_string_put(data->mlx, data->win, pos, 225, w, "Parallel             P");
-	mlx_string_put(data->mlx, data->win, pos, 250, w, "Isometric            I");
-	mlx_string_put(data->mlx, data->win, pos, 275, w, "Top                  T");
-	mlx_string_put(data->mlx, data->win, pos, 300, w, "Front                F");
-	mlx_string_put(data->mlx, data->win, pos, 325, w, "Right                R");
+	mlx_string_put(data->mlx, data->win, pos, 225, w, "Altitude           Z/X");
+	mlx_string_put(data->mlx, data->win, pos, 250, w, "Parallel             P");
+	mlx_string_put(data->mlx, data->win, pos, 275, w, "Isometric            I");
+	mlx_string_put(data->mlx, data->win, pos, 300, w, "Top                  T");
+	mlx_string_put(data->mlx, data->win, pos, 325, w, "Front                F");
+	mlx_string_put(data->mlx, data->win, pos, 350, w, "Right                R");
 	return ;
 }
 

@@ -101,14 +101,13 @@ void	init_data(t_data *data)
 		exit_error("Error: Failed to create mlx image", data->map);
 	data->adr = mlx_get_data_addr(data->img, &data->bpp, &data->size_line,
 			&data->endian);
-	if (!data->adr)
-		exit_error("Error: Failed to get mlx image data address", data->map);
 	data->zoom = 1;
 	data->offset_x = 0;
 	data->offset_y = 0;
 	data->angle_x = 0.0f;
 	data->angle_y = 0.0f;
 	data->angle_z = 0.0f;
+	data->altitude = 0.3f;
 	data->projection = 0;
 	data->mouse.is_pressed = 0;
 	initial_zoom(data);
